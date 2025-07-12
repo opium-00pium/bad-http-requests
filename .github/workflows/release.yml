@@ -1,0 +1,34 @@
+# .github/workflows/release.yml
+
+name: Build and Release EXE
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-release:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install pyinstaller requests
+
+      - name: Build Windows executable with PyInstaller
+        run: pyinstaller --onefile --name bad_http_req bad_http_req.py
+
+      - name: Upload EXE as a workflow artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: bad_http_req-windows-exe
+          path: dist/bad_http_req.exe
