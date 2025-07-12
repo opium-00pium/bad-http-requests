@@ -17,6 +17,8 @@
   <img src="https://raw.githubusercontent.com/opium-00pium/bad-http-requests/main/assets/screenshot.gif" alt="Tool Demo">
 </p>
 
+![Tool Screenshot](img/screenshot.png)
+
 ## ➤ 核心功能
 
 - **🚀 广泛扫描**: 检测超过10种潜在危险的HTTP方法，包括 `PUT`, `DELETE`, `COPY`, `MOVE`, `TRACE` 等。
