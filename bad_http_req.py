@@ -8,7 +8,6 @@ import os
 from urllib.parse import urlparse
 
 # 在Windows上尝试启用ANSI转义序列，以便颜色可以正常显示
-# 这对32位和64位Windows都适用，是一个用于兼容旧版终端的技巧
 if sys.platform == "win32":
     os.system("")
 
@@ -25,16 +24,20 @@ class Colors:
     CYAN = '\033[96m'
 
 def print_banner():
-    author_line = f"BY 0pium".center(49)
-    banner = f"""
+    """打印一个漂亮的横幅"""
+    banner_width = 49
+    title = f"{Colors.CYAN}BAD HTTP REQUESTS{Colors.RESET}".center(banner_width + len(Colors.CYAN) + len(Colors.RESET))
+    author = f"{Colors.YELLOW}BY 0pium{Colors.RESET}".center(banner_width + len(Colors.YELLOW) + len(Colors.RESET))
+
+    banner_str = f"""
     {Colors.RED}###################################################{Colors.RESET}
-    #                                                 #
-    #            {Colors.CYAN}BAD HTTP REQUESTS{Colors.RESET}                  #
-    #    {Colors.YELLOW}{author_line}{Colors.RESET}    #
-    #                                                 #
+    #{" ".center(banner_width)}#
+    #{title}#
+    #{author}#
+    #{" ".center(banner_width)}#
     {Colors.RED}###################################################{Colors.RESET}
     """
-    print(banner)
+    print(banner_str)
 
 def check_http_methods(url):
     """
@@ -59,14 +62,8 @@ def check_http_methods(url):
     print("\n[*] 开始逐一扫描所有潜在的HTTP方法...")
 
     methods_to_test = [
-        # 标准方法
-        'GET', 'POST', 'HEAD',
-        # 危险的写操作和调试方法
-        'PUT', 'DELETE', 'PATCH', 'TRACE',
-        # WebDAV危险方法
-        'COPY', 'MOVE', 'SEARCH',
-        # 其他常见或测试方法
-        'OPTIONS', 'CONNECT', 'TEST', 'GARBAGE'
+        'GET', 'POST', 'HEAD', 'PUT', 'DELETE', 'PATCH', 'TRACE',
+        'COPY', 'MOVE', 'SEARCH', 'OPTIONS', 'CONNECT', 'TEST', 'GARBAGE'
     ]
 
     enabled_methods = []
