@@ -58,7 +58,7 @@
 1.  确保您已安装 Python 3。
 2.  克隆本仓库：
     ```bash
-    git clone [https://github.com/opium-00pium/bad-http-requests.git](https://github.com/opium-00pium/bad-http-requests.git)
+    git clone https://github.com/opium-00pium/bad-http-requests.git
     cd bad-http-requests
     ```
 3.  安装依赖库：
