@@ -81,7 +81,8 @@ def check_http_methods(url, custom_data=None, custom_headers=None):
 
     methods_to_test = [
         'GET', 'POST', 'HEAD', 'PUT', 'DELETE', 'PATCH', 'TRACE',
-        'COPY', 'MOVE', 'SEARCH', 'OPTIONS', 'CONNECT', 'TEST', 'GARBAGE'
+        'COPY', 'MOVE', 'SEARCH', 'OPTIONS', 'CONNECT', 'TEST', 'GARBAGE',
+        'PROPFIND', 'PROPPATCH', 'MKCOL', 'LOCK', 'UNLOCK'
     ]
 
     enabled_methods = []
