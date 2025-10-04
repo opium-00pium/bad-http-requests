@@ -6,6 +6,7 @@
   </p>
   
   <p>
+    <a href="https://github.com/opium-00pium/bad-http-requests/actions/workflows/release.yml"><img src="https://github.com/opium-00pium/bad-http-requests/actions/workflows/release.yml/badge.svg" alt="Build Status"></a>
     <a href="https://github.com/opium-00pium/bad-http-requests/releases/latest"><img src="https://img.shields.io/github/v/release/opium-00pium/bad-http-requests?label=latest%20release&color=blue" alt="Latest Release"></a>
     <img src="https://img.shields.io/badge/Python-3.10+-blueviolet" alt="Python Version">
   </p>
@@ -14,15 +15,15 @@
 ---
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/opium-00pium/bad-http-requests/main/assets/screenshot.gif" alt="Tool Demo">
+  <img src="img/screenshot.png" alt="Tool Demo">
 </p>
-
-![Tool Screenshot](img/screenshot.png)
 
 ## ➤ 核心功能
 
-- **🚀 广泛扫描**: 检测超过10种潜在危险的HTTP方法，包括 `PUT`, `DELETE`, `COPY`, `MOVE`, `TRACE` 等。
+- **🚀 广泛扫描**: 检测十余种潜在危险的HTTP方法，包括 `PUT`, `DELETE`, `COPY`, `MOVE`, `TRACE` 等。
 - **🎨 彩色高亮**: 使用直观的颜色（红/黄/绿）区分危险、可疑和安全的方法，结果一目了然。
+- **⚙️ 高度自定义**: 支持通过 `-H` 添加自定义请求头（如`Authorization`），通过 `-d` 为`POST/PUT`请求附加数据。
+- **📦 自动构建**: 通过GitHub Actions在每次代码推送到`main`分支后自动构建Windows `.exe` 文件。
 - **💡 轻量快速**: 无需复杂依赖，执行迅速。
 
 ## ➤ 为何关注危险HTTP方法?
@@ -49,10 +50,8 @@
 3.  打开PowerShell，进入文件所在目录，然后运行：
 
     ```powershell
-    ./bad_http_req.exe -u <目标URL>
-
-    # 示例:
-    ./bad_http_req.exe -u http://example.com
+    # 基础用法
+    ./bad_http_req.exe -u http://example.com/api/user
     ```
 
 ### 方式二：从源码运行 (所有平台)
@@ -69,11 +68,37 @@
     ```
 4.  运行脚本：
     ```bash
-    python bad_http_req.py -u <目标URL>
-
-    # 示例:
-    python bad_http_req.py -u https://example.com
+    # 基础用法
+    python bad_http_req.py -u http://example.com/api/user
     ```
+
+## ➤ 高级用法示例
+
+利用 `-H` 和 `-d` 参数，您可以模拟更复杂的请求。
+
+### 添加认证Token
+
+当测试需要登录才能访问的接口时，这非常有用。
+
+```bash
+python bad_http_req.py -u http://api.example.com/v1/user -H "Authorization: Bearer yourSecretTokenGoesHere"
+```
+
+### 发送POST数据
+
+模拟登录或提交表单。**注意：如果JSON数据中包含双引号，请用单引号将整个数据包起来。**
+
+```bash
+python bad_http_req.py -u http://api.example.com/v1/login -d '{"username":"admin","password":"password123"}'
+```
+
+### 组合使用
+
+您可以将所有参数组合起来，进行一次非常具体的、高度自定义的扫描。
+
+```bash
+python bad_http_req.py -u http://api.example.com/v1/messages -H "Authorization: Bearer yourSecretTokenGoesHere" -H "Content-Type: application/json" -d '{"recipient":"user_a","message":"Hello World"}'
+```
 
 ## ➤ 开发与贡献
 
